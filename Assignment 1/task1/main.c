@@ -17,6 +17,7 @@ typedef unsigned char u8;
 
 int main(void)
 { DDRA =0xFF;
+ PORTA=0;
     while(1)
     { for(int i=0;i<6;i++){
 	   PORTA |=(1<<i);
