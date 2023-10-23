@@ -9,8 +9,8 @@
 #define SWITCH_INT_H_
 
 
-ES_t SWITCH_enuSwInit(u8 *Copy_PAstrSwitches);
-ES_t SWITCH_enuSwState(u8 *Copy_PAstrSwitches,u8 *Copy_u8SwState);
+ES_t SWITCH_enuSwInit(SW_t* Copy_PAstrSwitches);
+ES_t SWITCH_enuSwState(SW_t* Copy_PAstrSwitches, u8 *Copy_u8SwState);
 
 
 

@@ -36,12 +36,14 @@ ES_t SWITCH_enuSwInit(SW_t *Copy_PAstrSwitches)
 	}
 	return Local_ErrorState;
 }
-ES_t SWITCH_enuSwState(SW_t *Copy_PAstrSwitches, SW_t *Copy_u8SwState)
+ES_t SWITCH_enuSwState(SW_t *Copy_PAstrSwitches, u8 *Copy_u8SwState)
 {    ES_t Local_ErrorState = ES_NOK;
 
 	if(Copy_PAstrSwitches != NULL && Copy_u8SwState != NULL)
 	{
 		ES_t Local_ErrorState = DIO_enuGetPinValue(Copy_PAstrSwitches->SW_PORT_ID ,Copy_PAstrSwitches->SW_PIN_ID,Copy_u8SwState);
+	  if(Copy_PAstrSwitches->SW_STATUS==DIO_u8PULL_UP)
+		   *Copy_u8SwState =! *Copy_u8SwState;
 	}
 	else
 	{

@@ -8,7 +8,7 @@
 #ifndef SWITCH_CINFIG_H_
 #define SWITCH_CINFIG_H_
 
-#define SW_NUM    3
+#define SW_NUM    1
 
 typedef struct
 {
