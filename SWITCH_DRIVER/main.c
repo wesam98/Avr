@@ -20,7 +20,7 @@ while(1)
 	if(Local_SwState1==1)
 	{
 		DIO_enuSetPinValue(DIO_u8PORTB,DIO_u8PIN0,DIO_u8LOW);
-		while(SWITCH_enuSwState(&SWITCH_AstrSWStatus[0],&Local_SwState1));
+		
 	}
 
 	else
