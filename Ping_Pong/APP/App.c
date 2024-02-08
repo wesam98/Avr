@@ -76,7 +76,6 @@ void handling()
 		Ping_PongInit();
 		row_ball=2;
 		col_ball =2;
-		score1++;
 	}
 	else if(win2>win1 )
 	{
@@ -102,7 +101,7 @@ void handling()
 void ISR_INT0()
 {
 	win1+=1;
-	for( ;col_ball<14;col_ball++){
+	for( col_ball=1;col_ball<14;col_ball++){
 		row_ball=((col_ball<<0)&1)+2;
 
 		LCD_GOTO(row_ball,col_ball);
@@ -117,7 +116,7 @@ void ISR_INT0()
 void ISR_INT1()
 {
 	win2+=1;
-	for(;col_ball>1;col_ball--){
+	for(col_ball=14;col_ball>1;col_ball--){
 		row_ball=((col_ball<<0)&1)+2;
 
 		LCD_GOTO(row_ball,col_ball);
