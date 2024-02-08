@@ -8,7 +8,7 @@
 #include "../HAL/LCD/LCD_Int.h"
 #include "App.h"
 #include "util/delay.h"
-u8 win1 = 0,win2 = 0,score1 = 0,score2 = 0;
+u8 win1 = 0,win2 = 0,score1 = 0,score2 = 0,turns=5;
 u8 row_ball=2,col_ball=2;
 
 void Ping_PongInit()
@@ -34,10 +34,9 @@ void Ping_PongInit()
 
 }
 
-
+/*  function to Display a ball moving on LCD from one end to the other
 void Ping_PongStart()
 {
-
 	for( ;col_ball<14;col_ball++){
 		row_ball=((col_ball<<0)&1)+2;
 
@@ -56,11 +55,53 @@ void Ping_PongStart()
 		LCD_GOTO(row_ball,col_ball);
 		LCD_enuDisplayChar(' ');
 	}
+}*/
+void handling()
+{
+	_delay_ms(600);
+
+	if(win1 == win2 )
+	{
+
+	}
+
+	else if(win1>win2)
+	{
+		LCD_ClearDisp();
+		LCD_GOTO(1,1);
+		LCD_enuWriteString("Player 1 Won...");
+		score1++;
+		_delay_ms(500);
+		LCD_ClearDisp();
+		Ping_PongInit();
+		row_ball=2;
+		col_ball =2;
+		score1++;
+	}
+	else if(win2>win1 )
+	{
+		LCD_ClearDisp();
+		LCD_GOTO(1,1);
+		LCD_enuWriteString("Player 2 Won...");
+		score2++;
+		_delay_ms(500);
+		LCD_ClearDisp();
+		Ping_PongInit();
+		row_ball=3;
+		col_ball =2;
+
+	}
+	win1=0,win2=0;
+
+
 }
 
 
+/*  Use external interrupt to indicate If the player press the button, so the ball should bounce to the other side
+    and If not pressed the opposite player wins the game */
 void ISR_INT0()
 {
+	win1+=1;
 	for( ;col_ball<14;col_ball++){
 		row_ball=((col_ball<<0)&1)+2;
 
@@ -70,20 +111,12 @@ void ISR_INT0()
 		LCD_GOTO(row_ball,col_ball);
 		LCD_enuDisplayChar(' ');
 	}
-	LCD_ClearDisp();
-	LCD_GOTO(1,1);
-	LCD_enuWriteString("Player 1 Won...");
-	score1++;
-	_delay_ms(500);
-	LCD_ClearDisp();
-	Ping_PongInit();
-	row_ball=2;
-	col_ball =2;
-
 }
+
+
 void ISR_INT1()
 {
-
+	win2+=1;
 	for(;col_ball>1;col_ball--){
 		row_ball=((col_ball<<0)&1)+2;
 
@@ -93,13 +126,5 @@ void ISR_INT1()
 		LCD_GOTO(row_ball,col_ball);
 		LCD_enuDisplayChar(' ');
 	}
-	LCD_ClearDisp();
-	LCD_GOTO(1,1);
-	LCD_enuWriteString("Player 2 Won...");
-	score2++;
-	_delay_ms(500);
-	LCD_ClearDisp();
-	Ping_PongInit();
-	row_ball=3;
-	col_ball =2;
+
 }
